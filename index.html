@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Para mi Lunita ❤️</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;min-height:100vh;font-family:Arial,sans-serif;background:linear-gradient(135deg,#fff0f5,#ffe4ec);color:#3d2931}
+main{max-width:720px;margin:auto;padding:24px 16px}
+.screen{display:none}.active{display:block}
+.hero{text-align:center;padding:25px 10px 10px}
+.emoji{font-size:55px}.title{font-size:clamp(30px,8vw,48px);margin:10px 0;font-weight:800}
+.subtitle{color:#806b74;line-height:1.6}
+.card{background:#fff;border:1px solid #eadbe1;border-radius:24px;padding:22px;margin-top:18px;box-shadow:0 12px 35px rgba(100,40,60,.08)}
+.lovebox{background:#fff6f9;border-radius:18px;padding:18px;text-align:center;line-height:1.7}
+.btn{border:0;border-radius:15px;background:#c65373;color:white;font-weight:bold;padding:14px 20px;min-height:48px;cursor:pointer;font-size:15px}
+.btn.secondary{background:#fbe8ee;color:#c65373}
+.actions{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin-top:18px}
+.tiny{font-size:13px;color:#806b74;text-align:center}
+.stat{text-align:center;color:#806b74;font-size:14px;margin-bottom:10px}
+.arena{position:relative;height:320px;border:1px solid #eadbe1;border-radius:22px;overflow:hidden;background:linear-gradient(#fff7fa,#fff);touch-action:none}
+.basket{position:absolute;bottom:12px;left:50%;transform:translateX(-50%);font-size:48px}
+.fall{position:absolute;top:-50px;font-size:31px;animation:fall 2.6s linear forwards}
+@keyframes fall{to{top:340px}}
+.question{font-size:21px;font-weight:bold;text-align:center;line-height:1.4;margin-bottom:16px}
+.choices{display:grid;gap:10px}
+.choice{border:1px solid #eadbe1;background:white;border-radius:15px;padding:14px;min-height:50px;font-size:15px;text-align:left;cursor:pointer}
+.feedback{text-align:center;color:#806b74;min-height:22px;margin-top:13px}
+.memory{display:grid;gap:10px}
+.memory button{border:1px solid #eadbe1;background:white;border-radius:15px;padding:15px;text-align:left;cursor:pointer;font-size:15px}
+.reveal{display:none;background:#fff6f9;border-radius:15px;padding:15px;line-height:1.6}
+.reveal.show{display:block}
+.final{text-align:center}.heart{font-size:70px;animation:pulse 1.2s infinite}
+@keyframes pulse{50%{transform:scale(1.12)}}
+.letter{font-size:18px;line-height:1.7}
+@media(max-width:430px){main{padding:15px}.card{padding:15px}.arena{height:275px}}
+</style>
+</head>
+
+<body>
+<main>
+
+<section id="s0" class="screen active">
+<div class="hero">
+<div class="emoji">💗</div>
+<h1 class="title">Para mi Lunita</h1>
+<p class="subtitle">Preparé una pequeña aventura especialmente para vos. 🥰</p>
+</div>
+<div class="card">
+<div class="lovebox">
+<strong>🌙 Lunita de mi corazón 🌙</strong><br>
+Hace 1 mes y unas semanas que empezó nuestra historia...
+</div>
+<div class="actions">
+<button class="btn" id="begin">Comenzar aventura ✨</button>
+</div>
+<p class="tiny">Advertencia: contiene amor, cursilería y un poquito de vergüenza ajena 😌❤️</p>
+</div>
+</section>
+
+<section id="s1" class="screen">
+<div class="hero">
+<div class="stat">NIVEL 1 · 🛍️ · Puntos: <strong id="pts">0</strong></div>
+<h2 class="title" style="font-size:32px">Ayudá a Lunita</h2>
+<p class="subtitle">¡Atrapa los productos! Necesitás conseguir 8 puntos.</p>
+</div>
+<div class="card">
+<div id="arena" class="arena"><div id="basket" class="basket">🛍️</div></div>
+<div class="actions">
+<button class="btn secondary" id="skip1">Pasar de nivel ❤️</button>
+</div>
+</div>
+</section>
+
+<section id="s2" class="screen">
+<div class="hero">
+<div class="stat">NIVEL 2 · ¿CUÁNTO CONOCÉS A LUNITA?</div>
+<h2 class="title" style="font-size:32px">Preguntas especiales 😏</h2>
+</div>
+<div class="card">
+<div id="q" class="question"></div>
+<div id="opts" class="choices"></div>
+<div id="fb" class="feedback"></div>
+</div>
+</section>
+
+<section id="s3" class="screen">
+<div class="hero">
+<div class="emoji">💌</div>
+<h2 class="title" style="font-size:32px">Nuestros recuerdos</h2>
+<p class="subtitle">Tocá cada pista para descubrirla.</p>
+</div>
+<div class="card">
+<div class="memory">
+<button data-reveal="r1">🌙 Pista #1 — El comienzo</button>
+<div id="r1" class="reveal">Nos conocimos un <strong>viernes, en una fiesta</strong>... y vos me diste nuestro primer beso. :3 ❤️</div>
+
+<button data-reveal="r2">🐶 Pista #2 — Alguien especial</button>
+<div id="r2" class="reveal">Hay alguien que ocupa un lugar enorme en tu corazón: <strong>Woody</strong> 🐶❤️</div>
+
+<button data-reveal="r3">✈️ Pista #3 — Una aventura</button>
+<div id="r3" class="reveal">A Lunita le gusta <strong>viajar</strong>... así que espero que nos queden muchísimas aventuras juntos. 🌎</div>
+
+<button data-reveal="r4">🍝 Pista #4 — Su comida</button>
+<div id="r4" class="reveal">Si algún día no sabemos qué comer, ya sabemos: <strong>fideo con pollo</strong> 🍝🐔</div>
+</div>
+<div class="actions">
+<button class="btn" id="finishMemory">Encontré todas 💗</button>
+</div>
+</div>
+</section>
+
+<section id="s4" class="screen">
+<div class="hero">
+<div class="emoji">🎁</div>
+<h2 class="title" style="font-size:32px">Última misión</h2>
+<p class="subtitle">Una última pregunta para desbloquear tu regalo.</p>
+</div>
+<div class="card">
+<div class="question">¿Qué cosas le gustan a Lunita? 😏</div>
+<div class="choices" id="finalChoices">
+<button class="choice" data-ok="0">Fideo con pollo 🍝</button>
+<button class="choice" data-ok="0">Woody 🐶</button>
+<button class="choice" data-ok="0">Dormir 😴</button>
+<button class="choice" data-ok="1">Todas las anteriores ❤️</button>
+</div>
+<div id="finalFb" class="feedback"></div>
+</div>
+</section>
+
+<section id="s5" class="screen">
+<div class="hero">
+<div class="heart">💗</div>
+<h1 class="title">¡Misión completada!</h1>
+<p class="subtitle">Feliz Día del Comerciante, Lunita ❤️</p>
+</div>
+<div class="card final">
+<div class="lovebox">
+<div class="letter">
+<strong>Mi Lunita de mi corazón:</strong><br><br>
+Feliz Día del Comerciante, mi amor. ❤️<br><br>
+Quería hacerte algo distinto, algo que fuera solamente para vos.
+Hace apenas <strong>1 mes y unas semanas</strong> que estamos viviendo esta historia
+y ya tenemos nuestro viernes, nuestra fiesta y ese primer beso que me diste vos. :3<br><br>
+Espero que sigamos sumando recuerdos, risas, momentos juntos
+y muchas noches de dormir hasta tarde. 😴😂<br><br>
+<strong>Te amo mucho, Lunita de mi corazón ❤️</strong>
+</div>
+<br>
+<strong>— Con amor ❤️</strong>
+</div>
+<div class="actions">
+<button class="btn" id="restart">Volver a jugar 🔄</button>
+</div>
+</div>
+</section>
+
+</main>
+
+<script>
+const screens=document.querySelectorAll(".screen");
+const go=id=>screens.forEach(s=>s.classList.toggle("active",s.id===id));
+
+let points=0,fallTimer=null;
+const arena=document.getElementById("arena");
+const basket=document.getElementById("basket");
+const pts=document.getElementById("pts");
+
+function moveBasket(x){
+ const r=arena.getBoundingClientRect();
+ const p=Math.max(38,Math.min(r.width-38,x-r.left));
+ basket.style.left=p+"px";
+}
+arena.addEventListener("pointermove",e=>moveBasket(e.clientX));
+arena.addEventListener("pointerdown",e=>moveBasket(e.clientX));
+
+function spawn(){
+ const e=document.createElement("span");
+ e.className="fall";
+ e.textContent=["🧸","📦","🎁","💰","❤️"][Math.floor(Math.random()*5)];
+ e.style.left=(4+Math.random()*90)+"%";
+ arena.appendChild(e);
+
+ const timer=setInterval(()=>{
+  const a=e.getBoundingClientRect();
+  const b=basket.getBoundingClientRect();
+  if(a.bottom>=b.top && a.left<b.right && a.right>b.left){
+   points++;
+   pts.textContent=points;
+   e.remove();
+   clearInterval(timer);
+   if(points>=8){
+    clearInterval(fallTimer);
+    setTimeout(()=>{go("s2");renderQuestion()},400);
+   }
+  }
+ },70);
+
+ setTimeout(()=>{
+  clearInterval(timer);
+  if(e.isConnected)e.remove();
+ },2800);
+}
+
+function startGame(){
+ points=0;
+ pts.textContent="0";
+ go("s1");
+ clearInterval(fallTimer);
+ fallTimer=setInterval(spawn,600);
+}
+
+document.getElementById("begin").onclick=startGame;
+
+document.getElementById("skip1").onclick=()=>{
+ clearInterval(fallTimer);
+ go("s2");
+ renderQuestion();
+};
+
+const questions=[
+ {
+  q:"¿Qué comida le gusta a Lunita?",
+  o:["Pizza 🍕","Fideo con pollo 🍝🐔","Sushi 🍣","Hamburguesa 🍔"],
+  a:1
+ },
+ {
+  q:"¿Cómo se llama su perrito?",
+  o:["Toby 🐶","Rocky 🐶","Woody 🐶","Firulais 🐶"],
+  a:2
+ },
+ {
+  q:"¿Qué le gusta hacer?",
+  o:["Viajar ✈️","Dormir 😴","Las dos ❤️","Ninguna 😭"],
+  a:2
+ },
+ {
+  q:"¿Dónde nos conocimos?",
+  o:["En la facultad 🎓","Un viernes en una fiesta 🎉","En un viaje ✈️","En un supermercado 🛒"],
+  a:1
+ }
+];
+
+let qi=0;
+
+function renderQuestion(){
+ const x=questions[qi];
+ document.getElementById("q").textContent=x.q;
+ document.getElementById("fb").textContent="";
+ const box=document.getElementById("opts");
+ box.innerHTML="";
+
+ x.o.forEach((text,i)=>{
+  const b=document.createElement("button");
+  b.className="choice";
+  b.textContent=text;
+  b.onclick=()=>{
+   if(i===x.a){
+    qi++;
+    if(qi>=questions.length){
+     qi=0;
+     go("s3");
+    }else renderQuestion();
+   }else{
+    document.getElementById("fb").textContent="Mmm... esa no era 😏 Pensalo un poquito más ❤️";
+   }
+  };
+  box.appendChild(b);
+ });
+}
+
+document.querySelectorAll("[data-reveal]").forEach(btn=>{
+ btn.onclick=()=>{
+  document.getElementById(btn.dataset.reveal).classList.toggle("show");
+ };
+});
+
+document.getElementById("finishMemory").onclick=()=>go("s4");
+
+document.querySelectorAll("#finalChoices .choice").forEach(btn=>{
+ btn.onclick=()=>{
+  if(btn.dataset.ok==="1"){
+   go("s5");
+  }else{
+   document.getElementById("finalFb").textContent="Casi... pero había una respuesta que las juntaba a todas 😏❤️";
+  }
+ };
+});
+
+document.getElementById("restart").onclick=()=>{
+ clearInterval(fallTimer);
+ qi=0;
+ points=0;
+ pts.textContent="0";
+ go("s0");
+};
+</script>
+</body>
+</html>
